@@ -17,4 +17,13 @@
  @return 是否创建成功
  */
 + (BOOL)createTable:(Class)cls uid:(NSString *)uid;
+
+/**
+ 判断一个表格是否需要更新
+ 
+ @param cls 类名
+ @param uid 用户唯一标识
+ @return 是否需要更新
+ */
++ (BOOL)isTableRequiredUpdate:(Class)cls uid:(NSString *)uid;
 @end

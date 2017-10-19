@@ -21,4 +21,10 @@
     XCTAssertEqual(result, YES);
 }
 
+- (void)testIsTableRequiredUpdateWithUid {
+    Class cls = NSClassFromString(@"SLStu");
+    BOOL result = [SLSqliteModelTool isTableRequiredUpdate:cls uid:nil];
+    XCTAssertEqual(result, YES);
+}
+
 @end

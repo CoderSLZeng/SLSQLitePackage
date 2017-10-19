@@ -10,6 +10,7 @@
 #import "SLModelProtocol.h"
 #import "SLModelTool.h"
 #import "SLSqliteTool.h"
+#import "SLTableTool.h"
 
 @implementation SLSqliteModelTool
 // 关于这个工具类的封装
@@ -40,4 +41,16 @@
     return [SLSqliteTool deal:createTableSql uid:uid];
     
 }
+
++ (BOOL)isTableRequiredUpdate:(Class)cls uid:(NSString *)uid {
+    // 1. 获取类对应的所有有效成员变量名称, 并排序
+    NSArray *modelNames = [SLModelTool allTableSortedIvarNames:cls];
+    
+    // 2. 获取当前表格, 所有字段名称, 并排序
+    NSArray *tableNames = [SLTableTool tableSortedColumnNames:cls uid:uid];
+    
+    // 3. 通过对比数据判定是否需要更新
+    return ![modelNames isEqualToArray:tableNames];
+}
+
 @end
