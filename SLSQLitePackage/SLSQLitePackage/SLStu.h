@@ -17,4 +17,5 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) int age;
 @property (nonatomic, assign) float score;
+@property (nonatomic, assign) float score2;
 @end

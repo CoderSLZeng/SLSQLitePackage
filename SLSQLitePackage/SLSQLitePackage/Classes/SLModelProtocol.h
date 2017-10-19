@@ -13,5 +13,7 @@
 @required
 + (NSString *)primaryKey;
 
+@optional
++ (NSArray *)ignoreColumnNames;
 
 @end
