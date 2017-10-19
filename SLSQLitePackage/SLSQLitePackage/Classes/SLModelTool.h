@@ -33,4 +33,12 @@
  */
 + (NSDictionary *)classIvarNameSqliteTypeDic:(Class)cls;
 
+/**
+ 获取字段名称和sql类型, 拼接的用户创建表格的字符串
+ 
+ @param cls 类名
+ @return 字符串 如: name text,age integer,score real
+ */
++ (NSString *)columnNamesAndTypesStr:(Class)cls;
+
 @end

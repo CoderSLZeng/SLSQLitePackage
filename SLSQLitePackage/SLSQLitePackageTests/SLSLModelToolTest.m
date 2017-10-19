@@ -31,4 +31,10 @@
     NSLog(@"%@", dict);
 }
 
+- (void)testColumnNamesAndTypesStr {
+    NSString *columnName = [SLModelTool columnNamesAndTypesStr:[SLStu class]];
+    NSLog(@"%@", columnName);
+}
+
+
 @end

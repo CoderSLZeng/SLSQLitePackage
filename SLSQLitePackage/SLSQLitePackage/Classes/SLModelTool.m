@@ -57,6 +57,30 @@
     
 }
 
++ (NSString *)columnNamesAndTypesStr:(Class)cls {
+    
+    NSDictionary *nameTypeDic = [self classIvarNameSqliteTypeDic:cls];
+//    {
+//        age = integer;
+//        b = integer;
+//        name = text;
+//        score = real;
+//        stuNum = integer;
+//    }
+
+//    age integer,b integer
+    
+    NSMutableArray *result = [NSMutableArray array];
+    [nameTypeDic enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL * _Nonnull stop) {
+        
+        [result addObject:[NSString stringWithFormat:@"%@ %@", key, obj]];
+    }];
+    
+    
+    return [result componentsJoinedByString:@","];
+    
+}
+
 #pragma mark - 私有的方法
 + (NSDictionary *)ocTypeToSqliteTypeDic {
     return @{
