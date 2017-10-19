@@ -23,5 +23,15 @@
     XCTAssertEqual(result, YES);
 }
 
+- (void)testQuery {
+    
+    NSString *sql = @"select * from t_stu";
+    NSMutableArray *result = [SLSqliteTool querySql:sql uid:nil];
+    
+    NSLog(@"%@", result);
+    
+    
+}
+
 
 @end

@@ -23,4 +23,13 @@
  */
 + (BOOL)deal:(NSString *)sql uid:(NSString *)uid;
 
+/**
+ 查询语句, 有结果集返回
+ 
+ @param sql sql语句
+ @param uid 用户的唯一标识
+ @return 字典(一行记录)组成的数组
+ */
++ (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid;
+
 @end
