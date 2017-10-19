@@ -37,4 +37,11 @@
 }
 
 
+
+- (void)testAllTableSortedIvarNames {
+    NSArray *arry = [SLModelTool allTableSortedIvarNames:[SLStu class]];
+    NSLog(@"%@", arry);
+}
+
+
 @end

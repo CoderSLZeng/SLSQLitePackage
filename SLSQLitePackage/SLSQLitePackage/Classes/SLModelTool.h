@@ -41,4 +41,12 @@
  */
 + (NSString *)columnNamesAndTypesStr:(Class)cls;
 
+/**
+ 获取排序后的类名对应的成员变量数组, 用于和表格字段进行验证是否需要更新
+ 
+ @param cls 类名
+ @return 成员变量数组,
+ */
++ (NSArray *)allTableSortedIvarNames:(Class)cls;
+
 @end
