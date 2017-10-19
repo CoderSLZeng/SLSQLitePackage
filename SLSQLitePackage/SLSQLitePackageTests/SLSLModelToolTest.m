@@ -21,4 +21,9 @@
     NSLog(@"%@", tableName);
 }
 
+- (void)testClassIvarNameTypeDic {
+    NSDictionary *dict = [SLModelTool classIvarNameTypeDic:[SLStu class]];
+    NSLog(@"%@", dict);
+}
+
 @end

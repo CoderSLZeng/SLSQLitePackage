@@ -16,4 +16,12 @@
  @return 表格名称
  */
 + (NSString *)tableName:(Class)cls;
+
+/**
+ 获取所有的有效成员变量, 以及成员变量对应的类型
+ 
+ @param cls 类名
+ @return 所有的有效成员变量, 以及成员变量对应的类型
+ */
++ (NSDictionary *)classIvarNameTypeDic:(Class)cls;
 @end
