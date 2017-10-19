@@ -24,4 +24,13 @@
  @return 所有的有效成员变量, 以及成员变量对应的类型
  */
 + (NSDictionary *)classIvarNameTypeDic:(Class)cls;
+
+/**
+ 获取所有的成员变量, 以及成员变量映射到数据库里面对应的类型
+ 
+ @param cls 类名
+ @return 所有的成员变量, 以及成员变量映射到数据库里面对应的类型
+ */
++ (NSDictionary *)classIvarNameSqliteTypeDic:(Class)cls;
+
 @end

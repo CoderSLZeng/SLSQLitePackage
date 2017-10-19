@@ -26,4 +26,9 @@
     NSLog(@"%@", dict);
 }
 
+- (void)testClassIvarNameSqliteTypeDic {
+    NSDictionary *dict = [SLModelTool classIvarNameSqliteTypeDic:[SLStu class]];
+    NSLog(@"%@", dict);
+}
+
 @end

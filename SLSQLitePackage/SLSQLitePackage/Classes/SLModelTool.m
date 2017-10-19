@@ -43,4 +43,40 @@
     return nameTypeDic;
     
 }
+
++ (NSDictionary *)classIvarNameSqliteTypeDic:(Class)cls {
+    
+    NSMutableDictionary *dic = [[self classIvarNameTypeDic:cls] mutableCopy];
+    
+    NSDictionary *typeDic = [self ocTypeToSqliteTypeDic];
+    [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL * _Nonnull stop) {
+        dic[key] = typeDic[obj];
+    }];
+    
+    return dic;
+    
+}
+
+#pragma mark - 私有的方法
++ (NSDictionary *)ocTypeToSqliteTypeDic {
+    return @{
+             @"d": @"real", // double
+             @"f": @"real", // float
+             
+             @"i": @"integer",  // int
+             @"q": @"integer", // long
+             @"Q": @"integer", // long long
+             @"B": @"integer", // bool
+             
+             @"NSData": @"blob",
+             @"NSDictionary": @"text",
+             @"NSMutableDictionary": @"text",
+             @"NSArray": @"text",
+             @"NSMutableArray": @"text",
+             
+             @"NSString": @"text"
+             };
+    
+}
+
 @end
