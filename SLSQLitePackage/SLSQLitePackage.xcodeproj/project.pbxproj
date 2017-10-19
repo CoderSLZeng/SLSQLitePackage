@@ -20,6 +20,8 @@
 		AEE343881F98B69900E774A4 /* SLStu.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343861F98B69800E774A4 /* SLStu.m */; };
 		AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */; };
 		AEE3438D1F98B90100E774A4 /* SLModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3438C1F98B90100E774A4 /* SLModelTool.m */; };
+		AEE343911F98BDFB00E774A4 /* SLSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343901F98BDFA00E774A4 /* SLSqliteModelTool.m */; };
+		AEE343931F98BEDF00E774A4 /* SLSqliteModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343921F98BEDF00E774A4 /* SLSqliteModelToolTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,10 @@
 		AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSLModelToolTest.m; sourceTree = "<group>"; };
 		AEE3438B1F98B90100E774A4 /* SLModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLModelTool.h; sourceTree = "<group>"; };
 		AEE3438C1F98B90100E774A4 /* SLModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLModelTool.m; sourceTree = "<group>"; };
+		AEE3438E1F98BDFA00E774A4 /* SLSqliteModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSqliteModelTool.h; sourceTree = "<group>"; };
+		AEE3438F1F98BDFA00E774A4 /* SLModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLModelProtocol.h; sourceTree = "<group>"; };
+		AEE343901F98BDFA00E774A4 /* SLSqliteModelTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSqliteModelTool.m; sourceTree = "<group>"; };
+		AEE343921F98BEDF00E774A4 /* SLSqliteModelToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSqliteModelToolTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 				AEE343601F98B0D200E774A4 /* Info.plist */,
 				AEE3437B1F98B1B600E774A4 /* SLSLSqliteToolTest.m */,
 				AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */,
+				AEE343921F98BEDF00E774A4 /* SLSqliteModelToolTest.m */,
 			);
 			path = SLSQLitePackageTests;
 			sourceTree = "<group>";
@@ -157,6 +164,9 @@
 				AEE343791F98B14400E774A4 /* SLSqliteTool.m */,
 				AEE3438B1F98B90100E774A4 /* SLModelTool.h */,
 				AEE3438C1F98B90100E774A4 /* SLModelTool.m */,
+				AEE3438E1F98BDFA00E774A4 /* SLSqliteModelTool.h */,
+				AEE343901F98BDFA00E774A4 /* SLSqliteModelTool.m */,
+				AEE3438F1F98BDFA00E774A4 /* SLModelProtocol.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -297,6 +307,7 @@
 			files = (
 				AEE3437A1F98B14400E774A4 /* SLSqliteTool.m in Sources */,
 				AEE3434A1F98B0D200E774A4 /* ViewController.m in Sources */,
+				AEE343911F98BDFB00E774A4 /* SLSqliteModelTool.m in Sources */,
 				AEE343551F98B0D200E774A4 /* main.m in Sources */,
 				AEE343471F98B0D200E774A4 /* AppDelegate.m in Sources */,
 				AEE3438D1F98B90100E774A4 /* SLModelTool.m in Sources */,
@@ -310,6 +321,7 @@
 			files = (
 				AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */,
 				AEE3435F1F98B0D200E774A4 /* SLSQLitePackageTests.m in Sources */,
+				AEE343931F98BEDF00E774A4 /* SLSqliteModelToolTest.m in Sources */,
 				AEE3437C1F98B1B600E774A4 /* SLSLSqliteToolTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

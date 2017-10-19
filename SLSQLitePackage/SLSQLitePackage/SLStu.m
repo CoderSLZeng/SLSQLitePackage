@@ -10,4 +10,8 @@
 
 @implementation SLStu
 
++ (NSString *)primaryKey {
+    return @"stuNum";
+}
+
 @end

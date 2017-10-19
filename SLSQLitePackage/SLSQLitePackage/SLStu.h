@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SLModelProtocol.h"
 
-@interface SLStu : NSObject
+@interface SLStu : NSObject<SLModelProtocol>
 {
     int b;
 }
