@@ -17,6 +17,10 @@
     return NSStringFromClass(cls);
 }
 
++ (NSString *)temporaryTableName:(Class)cls {
+    return [NSStringFromClass(cls) stringByAppendingString:@"_tmp"];
+}
+
 + (NSDictionary *)classIvarNameTypeDic:(Class)cls {
     
     // 获取这个类, 里面, 所有的成员变量以及类型

@@ -18,6 +18,14 @@
 + (NSString *)tableName:(Class)cls;
 
 /**
+ 根据类名, 获取临时表格名称
+ 
+ @param cls 类名
+ @return 临时表格名称
+ */
++ (NSString *)temporaryTableName:(Class)cls;
+
+/**
  获取所有的有效成员变量, 以及成员变量对应的类型
  
  @param cls 类名
