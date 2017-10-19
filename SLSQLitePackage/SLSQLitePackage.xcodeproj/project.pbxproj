@@ -17,6 +17,9 @@
 		AEE3436A1F98B0D200E774A4 /* SLSQLitePackageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343691F98B0D200E774A4 /* SLSQLitePackageUITests.m */; };
 		AEE3437A1F98B14400E774A4 /* SLSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343791F98B14400E774A4 /* SLSqliteTool.m */; };
 		AEE3437C1F98B1B600E774A4 /* SLSLSqliteToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3437B1F98B1B600E774A4 /* SLSLSqliteToolTest.m */; };
+		AEE343881F98B69900E774A4 /* SLStu.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343861F98B69800E774A4 /* SLStu.m */; };
+		AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */; };
+		AEE3438D1F98B90100E774A4 /* SLModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3438C1F98B90100E774A4 /* SLModelTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,11 @@
 		AEE343781F98B14400E774A4 /* SLSqliteTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLSqliteTool.h; sourceTree = "<group>"; };
 		AEE343791F98B14400E774A4 /* SLSqliteTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSqliteTool.m; sourceTree = "<group>"; };
 		AEE3437B1F98B1B600E774A4 /* SLSLSqliteToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSLSqliteToolTest.m; sourceTree = "<group>"; };
+		AEE343851F98B69800E774A4 /* SLStu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLStu.h; sourceTree = "<group>"; };
+		AEE343861F98B69800E774A4 /* SLStu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLStu.m; sourceTree = "<group>"; };
+		AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSLModelToolTest.m; sourceTree = "<group>"; };
+		AEE3438B1F98B90100E774A4 /* SLModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLModelTool.h; sourceTree = "<group>"; };
+		AEE3438C1F98B90100E774A4 /* SLModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLModelTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,8 @@
 				AEE343461F98B0D200E774A4 /* AppDelegate.m */,
 				AEE343481F98B0D200E774A4 /* ViewController.h */,
 				AEE343491F98B0D200E774A4 /* ViewController.m */,
+				AEE343851F98B69800E774A4 /* SLStu.h */,
+				AEE343861F98B69800E774A4 /* SLStu.m */,
 				AEE3434B1F98B0D200E774A4 /* Main.storyboard */,
 				AEE3434E1F98B0D200E774A4 /* Assets.xcassets */,
 				AEE343501F98B0D200E774A4 /* LaunchScreen.storyboard */,
@@ -126,6 +136,7 @@
 				AEE3435E1F98B0D200E774A4 /* SLSQLitePackageTests.m */,
 				AEE343601F98B0D200E774A4 /* Info.plist */,
 				AEE3437B1F98B1B600E774A4 /* SLSLSqliteToolTest.m */,
+				AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */,
 			);
 			path = SLSQLitePackageTests;
 			sourceTree = "<group>";
@@ -144,6 +155,8 @@
 			children = (
 				AEE343781F98B14400E774A4 /* SLSqliteTool.h */,
 				AEE343791F98B14400E774A4 /* SLSqliteTool.m */,
+				AEE3438B1F98B90100E774A4 /* SLModelTool.h */,
+				AEE3438C1F98B90100E774A4 /* SLModelTool.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -286,6 +299,8 @@
 				AEE3434A1F98B0D200E774A4 /* ViewController.m in Sources */,
 				AEE343551F98B0D200E774A4 /* main.m in Sources */,
 				AEE343471F98B0D200E774A4 /* AppDelegate.m in Sources */,
+				AEE3438D1F98B90100E774A4 /* SLModelTool.m in Sources */,
+				AEE343881F98B69900E774A4 /* SLStu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */,
 				AEE3435F1F98B0D200E774A4 /* SLSQLitePackageTests.m in Sources */,
 				AEE3437C1F98B1B600E774A4 /* SLSLSqliteToolTest.m in Sources */,
 			);
