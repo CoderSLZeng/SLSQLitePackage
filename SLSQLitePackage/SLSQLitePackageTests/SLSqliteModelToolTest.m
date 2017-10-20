@@ -48,10 +48,10 @@
 - (void)testSaveOrUpdateModel {
     
     SLStu *stu = [[SLStu alloc] init];
-    stu.stuNum = 4;
-    stu.age2 = 4;
-    stu.name = @"王二小2";
-    stu.score = 1;
+    stu.stuNum = 3;
+    stu.age2 = 52;
+    stu.name = @"王二小";
+    stu.score = 17;
     
     [SLSqliteModelTool saveOrUpdateModel:stu uid:nil];
 
@@ -78,6 +78,16 @@
 - (void)testDeleteModelWhere {
     
     [SLSqliteModelTool deleteModel:[SLStu class] whereStr:@"score <= 4" uid:nil];
+    
+}
+
+
+/**
+ 测试根据字段名条件筛选来删除模型
+ */
+- (void)testDeleteModelWhere2 {
+    
+    [SLSqliteModelTool deleteModel:[SLStu class] columnName:@"name" relation:ColumnNameToValueRelationTypeEqual value:@"王二小" uid:nil];
     
 }
 

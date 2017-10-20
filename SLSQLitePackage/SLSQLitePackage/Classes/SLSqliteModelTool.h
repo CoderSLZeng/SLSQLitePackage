@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, ColumnNameToValueRelationType) {
+    ColumnNameToValueRelationTypeMore,
+    ColumnNameToValueRelationTypeLess,
+    ColumnNameToValueRelationTypeEqual,
+    ColumnNameToValueRelationTypeMoreEqual,
+    ColumnNameToValueRelationTypeLessEqual,
+};
+
 @interface SLSqliteModelTool : NSObject
 /**
  根据一个模型类, 创建数据库表
@@ -66,5 +74,19 @@
  @return 是否删除模型成功
  */
 + (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr uid:(NSString *)uid;
+
+// score > 10 or name = 'xx'
+
+/**
+ 根据字段名条件筛选来删除模型
+
+ @param cls 类名
+ @param name 字段名
+ @param relation 关系类型
+ @param value 字段名的值
+ @param uid 用户唯一标识
+ @return 是否删除模型成功
+ */
++ (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid;
 
 @end

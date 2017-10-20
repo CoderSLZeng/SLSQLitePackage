@@ -209,4 +209,27 @@
     
 }
 
++ (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    
+    
+    
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ %@ '%@'", tableName, name, self.ColumnNameToValueRelationTypeDic[@(relation)], value];
+    
+    // 假设肯定传
+    
+    return [SLSqliteTool deal:deleteSql uid:uid];
+}
+
++ (NSDictionary *)ColumnNameToValueRelationTypeDic {
+    return @{
+             @(ColumnNameToValueRelationTypeMore):@">",
+             @(ColumnNameToValueRelationTypeLess):@"<",
+             @(ColumnNameToValueRelationTypeEqual):@"=",
+             @(ColumnNameToValueRelationTypeMoreEqual):@">=",
+             @(ColumnNameToValueRelationTypeLessEqual):@"<="
+             };
+}
+
 @end
