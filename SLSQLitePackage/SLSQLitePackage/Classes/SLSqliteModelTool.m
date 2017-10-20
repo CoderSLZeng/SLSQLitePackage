@@ -77,11 +77,26 @@
     NSArray *oldNames = [SLTableTool tableSortedColumnNames:cls uid:uid];
     NSArray *newNames = [SLModelTool allTableSortedIvarNames:cls];
     
+    // 4. 获取更名字典
+    NSDictionary *newNameToOldNameDic = @{};
+    //  @{@"age": @"age2"};
+    if ([cls respondsToSelector:@selector(newNameToOldNameDic)]) {
+        newNameToOldNameDic = [cls newNameToOldNameDic];
+    }
+    
     for (NSString *columnName in newNames) {
-        if (![oldNames containsObject:columnName]) {
+        NSString *oldName = columnName;
+        // 找映射的旧的字段名称
+        if ([newNameToOldNameDic[columnName] length] != 0) {
+            oldName = newNameToOldNameDic[columnName];
+        }
+        // 如果老表包含了新的列明, 应该从老表更新到临时表格里面
+        if ((![oldNames containsObject:columnName] && ![oldNames containsObject:oldName]) || [columnName isEqualToString:primaryKey]) {
             continue;
         }
-        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@)", tmpTableName, columnName, columnName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
+        // SLstu_tmp  age
+        // update 临时表 set 新字段名称 = (select 旧字段名 from 旧表 where 临时表.主键 = 旧表.主键)
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@)", tmpTableName, columnName, oldName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
         [execSqls addObject:updateSql];
     }
     
