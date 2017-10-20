@@ -98,4 +98,17 @@ typedef NS_ENUM(NSUInteger, ColumnNameToValueRelationType) {
  */
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid;
 
+
+/**
+ 根据字段名条件筛选来查询，获取模型
+
+ @param cls 类名
+ @param name 字段名
+ @param relation 关系类型
+ @param value 字段名的值
+ @param uid 用户唯一标识
+ @return 模型的结果集，模型数组
+ */
++ (NSArray *)queryModels:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid;
+
 @end

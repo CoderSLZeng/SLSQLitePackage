@@ -98,4 +98,12 @@
  
 }
 
+- (void)testQueryModels {
+    
+    NSArray *results = [SLSqliteModelTool queryModels:[SLStu class] columnName:@"name" relation:ColumnNameToValueRelationTypeEqual value:@"王二小1" uid:nil];
+    NSLog(@"%@", results);
+    
+    
+}
+
 @end

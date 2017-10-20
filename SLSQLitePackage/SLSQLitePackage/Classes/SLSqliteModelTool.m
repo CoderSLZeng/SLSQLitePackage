@@ -235,6 +235,28 @@
     
     
     // 3. 处理查询的结果集 -> 模型数组
+    return [self parseResults:results withClass:cls];
+    
+}
+
++ (NSArray *)queryModels:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    // 1. 拼接sql语句
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' ", tableName, name, self.ColumnNameToValueRelationTypeDic[@(relation)], value];
+    
+    
+    // 2. 查询结果集
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    return [self parseResults:results withClass:cls];
+    
+}
+
+#pragma mark - 私有方法
++ (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls {
+    
+    // 3. 处理查询的结果集 -> 模型数组
     NSMutableArray *models = [NSMutableArray array];
     for (NSDictionary *modelDic in results) {
         id model = [[cls alloc] init];
@@ -243,7 +265,6 @@
     }
     
     return models;
-    
 }
 
 + (NSDictionary *)ColumnNameToValueRelationTypeDic {
