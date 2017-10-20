@@ -21,4 +21,10 @@
     NSLog(@"%@", arry);
 }
 
+- (void)testIsTableExists {
+    Class cls = NSClassFromString(@"SLStu");
+    BOOL result = [SLTableTool isTableExists:cls uid:nil];
+    XCTAssertEqual(result, YES);
+}
+
 @end
