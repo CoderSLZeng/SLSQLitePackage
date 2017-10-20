@@ -26,4 +26,13 @@
  @return 是否需要更新
  */
 + (BOOL)isTableRequiredUpdate:(Class)cls uid:(NSString *)uid;
+
+/**
+ 更新表格
+ 
+ @param cls 类名
+ @param uid 用户唯一标识
+ @return 是否更新成功
+ */
++ (BOOL)updateTable:(Class)cls uid:(NSString *)uid;
 @end

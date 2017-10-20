@@ -27,4 +27,10 @@
     XCTAssertEqual(result, YES);
 }
 
+- (void)testUpdateTable {
+    Class cls = NSClassFromString(@"SLStu");
+    BOOL result = [SLSqliteModelTool updateTable:cls uid:nil];
+    XCTAssertEqual(result, YES);
+}
+
 @end
