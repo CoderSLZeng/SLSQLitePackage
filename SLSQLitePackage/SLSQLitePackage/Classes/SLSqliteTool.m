@@ -35,6 +35,22 @@ sqlite3 *ppDb = nil;
     
 }
 
++ (BOOL)dealSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid {
+    
+    [self beginTransaction:uid];
+    
+    for (NSString *sql in sqls) {
+        BOOL result = [self deal:sql uid:uid];
+        if (result == NO) {
+            [self rollBackTransaction:uid];
+            return NO;
+        }
+    }
+    
+    [self commitTransaction:uid];
+    return YES;
+}
+
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid {
     [self openDB:uid];
     // 准备语句(预处理语句)
@@ -125,6 +141,17 @@ sqlite3 *ppDb = nil;
     
     return  sqlite3_open(dbPath.UTF8String, &ppDb) == SQLITE_OK;
     
+}
+
++ (void)beginTransaction:(NSString *)uid {
+    [self deal:@"begin transaction" uid:uid];
+}
+
++ (void)commitTransaction:(NSString *)uid {
+    [self deal:@"commit transaction" uid:uid];
+}
++ (void)rollBackTransaction:(NSString *)uid {
+    [self deal:@"rollback transaction" uid:uid];
 }
 
 + (void)closeDB {

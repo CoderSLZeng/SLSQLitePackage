@@ -24,6 +24,15 @@
 + (BOOL)deal:(NSString *)sql uid:(NSString *)uid;
 
 /**
+ 同时处理多条语句, 并使用事务进行包装
+ 
+ @param sqls sql语句数组
+ @param uid 用户的唯一标识
+ @return 是否全部处理成功; 注意, 如果有一条没有成功, 则会进行回滚操作
+ */
++ (BOOL)dealSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid;
+
+/**
  查询语句, 有结果集返回
  
  @param sql sql语句
