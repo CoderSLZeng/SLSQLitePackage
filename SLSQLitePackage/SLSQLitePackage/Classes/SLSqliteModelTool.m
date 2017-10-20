@@ -222,6 +222,30 @@
     return [SLSqliteTool deal:deleteSql uid:uid];
 }
 
++ (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    // 1. sql
+    NSString *sql = [NSString stringWithFormat:@"select * from %@", tableName];
+    
+    // 2. 执行查询,
+    // key value
+    // 模型的属性名称, 和属性值
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    
+    // 3. 处理查询的结果集 -> 模型数组
+    NSMutableArray *models = [NSMutableArray array];
+    for (NSDictionary *modelDic in results) {
+        id model = [[cls alloc] init];
+        [models addObject:model];
+        [model setValuesForKeysWithDictionary:modelDic];
+    }
+    
+    return models;
+    
+}
+
 + (NSDictionary *)ColumnNameToValueRelationTypeDic {
     return @{
              @(ColumnNameToValueRelationTypeMore):@">",

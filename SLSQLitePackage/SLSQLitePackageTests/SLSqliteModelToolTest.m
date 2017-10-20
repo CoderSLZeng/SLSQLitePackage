@@ -91,4 +91,11 @@
     
 }
 
+- (void)testQueryAllModels {
+    
+    NSArray *array = [SLSqliteModelTool queryAllModels:[SLStu class] uid:nil];
+    NSLog(@"%@", array);
+ 
+}
+
 @end

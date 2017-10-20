@@ -89,4 +89,13 @@ typedef NS_ENUM(NSUInteger, ColumnNameToValueRelationType) {
  */
 + (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid;
 
+/**
+ 根据表名查询，获取所有的模型
+
+ @param cls 类名
+ @param uid 用户唯一标识
+ @return 所有模型的结果集，模型数组
+ */
++ (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid;
+
 @end
