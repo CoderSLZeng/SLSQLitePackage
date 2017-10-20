@@ -67,6 +67,8 @@
     }
     NSMutableArray *execSqls = [NSMutableArray array];
     NSString *primaryKey = [cls primaryKey];
+    NSString *dropTmpTableSql = [NSString stringWithFormat:@"drop table if exists %@;", tmpTableName];
+    [execSqls addObject:dropTmpTableSql];
     NSString *createTableSql = [NSString stringWithFormat:@"create table if not exists %@(%@, primary key(%@));", tmpTableName, [SLModelTool columnNamesAndTypesStr:cls], primaryKey];
     [execSqls addObject:createTableSql];
     // 2. 根据主键, 插入数据
@@ -96,14 +98,14 @@
         }
         // SLstu_tmp  age
         // update 临时表 set 新字段名称 = (select 旧字段名 from 旧表 where 临时表.主键 = 旧表.主键)
-        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@)", tmpTableName, columnName, oldName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@);", tmpTableName, columnName, oldName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
         [execSqls addObject:updateSql];
     }
     
-    NSString *deleteOldTable = [NSString stringWithFormat:@"drop table if exists %@", tableName];
+    NSString *deleteOldTable = [NSString stringWithFormat:@"drop table if exists %@;", tableName];
     [execSqls addObject:deleteOldTable];
     
-    NSString *renameTableName = [NSString stringWithFormat:@"alter table %@ rename to %@", tmpTableName, tableName];
+    NSString *renameTableName = [NSString stringWithFormat:@"alter table %@ rename to %@;", tmpTableName, tableName];
     [execSqls addObject:renameTableName];
     
     
@@ -122,7 +124,11 @@
     }
     // 2. 检测表格是否需要更新, 需要, 更新
     if ([self isTableRequiredUpdate:cls uid:uid]) {
-        [self updateTable:cls uid:uid];
+        BOOL updateSuccess = [self updateTable:cls uid:uid];
+        if (!updateSuccess) {
+            NSLog(@"更新数据库表结构失败");
+            return NO;
+        }
     }
     
     // 3. 判断记录是否存在, 主键
@@ -140,7 +146,7 @@
     NSArray *result = [SLSqliteTool querySql:checkSql uid:uid];
     
     
-    // 获取字段数组
+    // 获取字段名称数组
     NSArray *columnNames = [SLModelTool classIvarNameTypeDic:cls].allKeys;
     
     // 获取值数组
@@ -148,6 +154,18 @@
     NSMutableArray *values = [NSMutableArray array];
     for (NSString *columnName in columnNames) {
         id value = [model valueForKeyPath:columnName];
+        
+        if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSDictionary class]]) {
+            // 在这里, 把字典或者数组, 处理成为一个字符串, 保存到数据库里面去
+            
+            // 字典/数组 -> data
+            NSData *data = [NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:nil];
+            
+            // data -> nsstring
+            value = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+        
+        
         [values addObject:value];
     }
     
@@ -209,6 +227,8 @@
     
 }
 
+
+
 + (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid {
     
     NSString *tableName = [SLModelTool tableName:cls];
@@ -231,11 +251,13 @@
     // 2. 执行查询,
     // key value
     // 模型的属性名称, 和属性值
+    // xx 字符串
+    // oo 字符串
     NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
     
     
     // 3. 处理查询的结果集 -> 模型数组
-    return [self parseResults:results withClass:cls];
+    return [self parseResults:results withClass:cls];;
     
 }
 
@@ -267,10 +289,42 @@
     
     // 3. 处理查询的结果集 -> 模型数组
     NSMutableArray *models = [NSMutableArray array];
+    
+    // 属性名称 -> 类型 dic
+    NSDictionary *nameTypeDic = [SLModelTool classIvarNameTypeDic:cls];
+    
     for (NSDictionary *modelDic in results) {
         id model = [[cls alloc] init];
         [models addObject:model];
-        [model setValuesForKeysWithDictionary:modelDic];
+        
+        [modelDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            // xx NSMutableArray
+            // oo NSDictionary
+            //            [
+            //            "2",
+            //            "3"
+            //            ]
+            NSString *type = nameTypeDic[key];
+            //            NSArray
+            //            NSMutableArray
+            //            NSDictionary
+            //            NSMutableDictionary
+            id resultValue = obj;
+            if ([type isEqualToString:@"NSArray"] || [type isEqualToString:@"NSDictionary"]) {
+                
+                // 字符串 ->
+                NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+                resultValue = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                
+            }else if ([type isEqualToString:@"NSMutableArray"] || [type isEqualToString:@"NSMutableDictionary"]) {
+                NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+                resultValue = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            }
+            
+            [model setValue:resultValue forKeyPath:key];
+            
+        }];
     }
     
     return models;

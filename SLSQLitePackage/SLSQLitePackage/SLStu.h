@@ -18,4 +18,7 @@
 @property (nonatomic, assign) int age2;
 @property (nonatomic, assign) float score;
 @property (nonatomic, assign) float score2;
+
+@property (nonatomic, strong) NSMutableArray *xx;
+@property (nonatomic, strong) NSDictionary *oo;
 @end
