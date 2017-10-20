@@ -253,6 +253,15 @@
     
 }
 
++ (NSArray *)queryModels:(Class)cls WithSql:(NSString *)sql uid:(NSString *)uid {
+    
+    // 2. 查询结果集
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    return [self parseResults:results withClass:cls];
+    
+}
+
 #pragma mark - 私有方法
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls {
     

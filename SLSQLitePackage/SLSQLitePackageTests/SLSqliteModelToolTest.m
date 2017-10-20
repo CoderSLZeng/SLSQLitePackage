@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "SLSqliteModelTool.h"
 #import "SLStu.h"
+#import "SLModelTool.h"
 
 @interface SLSqliteModelToolTest : XCTestCase
 
@@ -91,6 +92,10 @@
     
 }
 
+
+/**
+ 测试根据字段名条件筛选来查询，获取模型
+ */
 - (void)testQueryAllModels {
     
     NSArray *array = [SLSqliteModelTool queryAllModels:[SLStu class] uid:nil];
@@ -98,12 +103,25 @@
  
 }
 
+
+/**
+ 测试根据字段名条件筛选来查询，获取模型
+ */
 - (void)testQueryModels {
     
     NSArray *results = [SLSqliteModelTool queryModels:[SLStu class] columnName:@"name" relation:ColumnNameToValueRelationTypeEqual value:@"王二小1" uid:nil];
     NSLog(@"%@", results);
     
+}
+
+- (void)testQueryModelsWithSql {
     
+    NSString *tableName = [SLModelTool tableName:[SLStu class]];
+    // 1. sql
+    NSString *sqlStr = [NSString stringWithFormat:@"select * from %@", tableName];
+    
+    NSArray *results = [SLSqliteModelTool queryModels:[SLStu class] WithSql:sqlStr uid:nil];
+    NSLog(@"%@", results);
 }
 
 @end
