@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE9544B71F99C15F00CB466B /* SLModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9544B61F99C15F00CB466B /* SLModelToolTest.m */; };
 		AEE343471F98B0D200E774A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343461F98B0D200E774A4 /* AppDelegate.m */; };
 		AEE3434A1F98B0D200E774A4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343491F98B0D200E774A4 /* ViewController.m */; };
 		AEE3434D1F98B0D200E774A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEE3434B1F98B0D200E774A4 /* Main.storyboard */; };
@@ -17,7 +18,6 @@
 		AEE3436A1F98B0D200E774A4 /* SLSQLitePackageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343691F98B0D200E774A4 /* SLSQLitePackageUITests.m */; };
 		AEE3437A1F98B14400E774A4 /* SLSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343791F98B14400E774A4 /* SLSqliteTool.m */; };
 		AEE343881F98B69900E774A4 /* SLStu.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343861F98B69800E774A4 /* SLStu.m */; };
-		AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */; };
 		AEE3438D1F98B90100E774A4 /* SLModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3438C1F98B90100E774A4 /* SLModelTool.m */; };
 		AEE343911F98BDFB00E774A4 /* SLSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343901F98BDFA00E774A4 /* SLSqliteModelTool.m */; };
 		AEE343931F98BEDF00E774A4 /* SLSqliteModelToolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE343921F98BEDF00E774A4 /* SLSqliteModelToolTest.m */; };
@@ -44,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE9544B61F99C15F00CB466B /* SLModelToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLModelToolTest.m; sourceTree = "<group>"; };
 		AEE343421F98B0D200E774A4 /* SLSQLitePackage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLSQLitePackage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEE343451F98B0D200E774A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AEE343461F98B0D200E774A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		AEE343791F98B14400E774A4 /* SLSqliteTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSqliteTool.m; sourceTree = "<group>"; };
 		AEE343851F98B69800E774A4 /* SLStu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLStu.h; sourceTree = "<group>"; };
 		AEE343861F98B69800E774A4 /* SLStu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLStu.m; sourceTree = "<group>"; };
-		AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLSLModelToolTest.m; sourceTree = "<group>"; };
 		AEE3438B1F98B90100E774A4 /* SLModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLModelTool.h; sourceTree = "<group>"; };
 		AEE3438C1F98B90100E774A4 /* SLModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLModelTool.m; sourceTree = "<group>"; };
 		AEE3438E1F98BDFA00E774A4 /* SLSqliteModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSqliteModelTool.h; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				AEE3435E1F98B0D200E774A4 /* SLSQLitePackageTests.m */,
 				AEE343601F98B0D200E774A4 /* Info.plist */,
 				AEE3439C1F98D14000E774A4 /* SLSqliteToolTest.m */,
-				AEE343891F98B73E00E774A4 /* SLSLModelToolTest.m */,
+				AE9544B61F99C15F00CB466B /* SLModelToolTest.m */,
 				AEE343921F98BEDF00E774A4 /* SLSqliteModelToolTest.m */,
 				AEE3439A1F98CA9800E774A4 /* SLTableToolTest.m */,
 			);
@@ -328,7 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEE3438A1F98B73E00E774A4 /* SLSLModelToolTest.m in Sources */,
+				AE9544B71F99C15F00CB466B /* SLModelToolTest.m in Sources */,
 				AEE3435F1F98B0D200E774A4 /* SLSQLitePackageTests.m in Sources */,
 				AEE3439D1F98D14000E774A4 /* SLSqliteToolTest.m in Sources */,
 				AEE343931F98BEDF00E774A4 /* SLSqliteModelToolTest.m in Sources */,

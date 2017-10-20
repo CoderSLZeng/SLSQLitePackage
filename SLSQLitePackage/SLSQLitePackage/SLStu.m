@@ -19,7 +19,7 @@
 }
 
 + (NSDictionary *)newNameToOldNameDic {
-    return @{@"age2": @"age"};
+    return @{ @"arr" : @"ID", @"dict" : @"book"};
 }
 
 @end

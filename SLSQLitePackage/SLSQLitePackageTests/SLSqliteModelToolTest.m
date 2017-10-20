@@ -49,10 +49,16 @@
 - (void)testSaveOrUpdateModel {
     
     SLStu *stu = [[SLStu alloc] init];
-    stu.stuNum = 3;
-    stu.age2 = 52;
-    stu.name = @"王二小";
-    stu.score = 17;
+    stu.stuNum = 31;
+    stu.age = 521;
+    stu.name = @"王二小1";
+    stu.score = 171;
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:@1];
+    [arr addObject:@2];
+//    stu.ID = arr;
+//    stu.book = @{@"问题的力量": @"zeng", @"从入门到放弃": @"xin"};
+    
     
     [SLSqliteModelTool saveOrUpdateModel:stu uid:nil];
 
@@ -65,7 +71,7 @@
     
     SLStu *stu = [[SLStu alloc] init];
     stu.stuNum = 2;
-    stu.age2 = 28;
+    stu.age = 28;
     stu.name = @"王二小";
     stu.score = 99;
     
@@ -114,6 +120,10 @@
     
 }
 
+
+/**
+ 测试根据SQL语句查询，获取模型
+ */
 - (void)testQueryModelsWithSql {
     
     NSString *tableName = [SLModelTool tableName:[SLStu class]];
