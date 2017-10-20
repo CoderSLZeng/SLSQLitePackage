@@ -180,4 +180,20 @@
     return [SLSqliteTool deal:execSql uid:uid];
 }
 
++ (BOOL)deleteModel:(id)model uid:(NSString *)uid {
+    
+    Class cls = [model class];
+    NSString *tableName = [SLModelTool tableName:cls];
+    if (![cls respondsToSelector:@selector(primaryKey)]) {
+        NSLog(@"如果想要操作这个模型, 必须要实现+ (NSString *)primaryKey;这个方法, 来告诉我主键信息");
+        return NO;
+    }
+    NSString *primaryKey = [cls primaryKey];
+    id primaryValue = [model valueForKeyPath:primaryKey];
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", tableName, primaryKey, primaryValue];
+    
+    return [SLSqliteTool deal:deleteSql uid:uid];
+    
+}
+
 @end

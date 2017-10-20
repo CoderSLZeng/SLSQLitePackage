@@ -57,4 +57,19 @@
 
 }
 
+/**
+ 测试删除模型
+ */
+- (void)testDeleteModel {
+    
+    SLStu *stu = [[SLStu alloc] init];
+    stu.stuNum = 2;
+    stu.age2 = 28;
+    stu.name = @"王二小";
+    stu.score = 99;
+    
+    [SLSqliteModelTool deleteModel:stu uid:nil];
+ 
+}
+
 @end

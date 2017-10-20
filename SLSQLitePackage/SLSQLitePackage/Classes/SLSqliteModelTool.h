@@ -44,4 +44,15 @@
  @return 是否保存/更新模型成功
  */
 + (BOOL)saveOrUpdateModel:(id)model uid:(NSString *)uid;
+
+
+/**
+ 删除模型
+
+ @param model 模型
+ @param uid 用户唯一标识
+ @return 是否删除模型成功
+ */
++ (BOOL)deleteModel:(id)model uid:(NSString *)uid;
+
 @end
