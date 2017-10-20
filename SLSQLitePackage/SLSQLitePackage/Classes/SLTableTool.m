@@ -24,7 +24,7 @@
     
     NSMutableDictionary *dic = [SLSqliteTool querySql:queryCreateSqlStr uid:uid].firstObject;
     
-    NSString *createTableSql = [dic[@"sql"] lowercaseString];
+    NSString *createTableSql = dic[@"sql"];
     if (createTableSql.length == 0) {
         return nil;
     }
@@ -60,7 +60,7 @@
     NSMutableArray *names = [NSMutableArray array];
     for (NSString *nameType in nameTypeArray) {
         
-        if ([nameType containsString:@"primary"]) {
+        if ([[nameType lowercaseString] containsString:@"primary"]) {
             continue;
         }
         NSString *nameType2 = [nameType stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];

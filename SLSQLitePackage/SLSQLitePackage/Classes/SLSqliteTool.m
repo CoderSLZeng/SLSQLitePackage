@@ -36,9 +36,10 @@ sqlite3 *ppDb = nil;
 }
 
 + (BOOL)dealSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid {
-    
+    // 1. 开始事务
     [self beginTransaction:uid];
     
+    // 2. 执行事务, 如果有一条执行失败, 则终止执行并执行回滚操作
     for (NSString *sql in sqls) {
         BOOL result = [self deal:sql uid:uid];
         if (result == NO) {
@@ -46,7 +47,7 @@ sqlite3 *ppDb = nil;
             return NO;
         }
     }
-    
+    // 3. 提交事务
     [self commitTransaction:uid];
     return YES;
 }
@@ -130,6 +131,7 @@ sqlite3 *ppDb = nil;
 
 #pragma mark - 私有方法
 + (BOOL)openDB:(NSString *)uid {
+    // 0. 确定路径
     NSString *dbName = @"common.sqlite";
     if (uid.length != 0) {
         dbName = [NSString stringWithFormat:@"%@.sqlite", uid];
