@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "SLSqliteModelTool.h"
+#import "SLStu.h"
 
 @interface SLSqliteModelToolTest : XCTestCase
 
@@ -15,22 +16,45 @@
 
 @implementation SLSqliteModelToolTest
 
+/**
+ 测试创建表格
+ */
 - (void)testCreateTableWithUid {
     Class cls = NSClassFromString(@"SLStu");
     BOOL result = [SLSqliteModelTool createTable:cls uid:nil];
     XCTAssertEqual(result, YES);
 }
 
+/**
+ 测试是否需要更新
+ */
 - (void)testIsTableRequiredUpdateWithUid {
     Class cls = NSClassFromString(@"SLStu");
     BOOL result = [SLSqliteModelTool isTableRequiredUpdate:cls uid:nil];
     XCTAssertEqual(result, YES);
 }
 
+/**
+ 测试更新表格
+ */
 - (void)testUpdateTable {
     Class cls = NSClassFromString(@"SLStu");
     BOOL result = [SLSqliteModelTool updateTable:cls uid:nil];
     XCTAssertEqual(result, YES);
+}
+/**
+ 测试保存/更新模型
+ */
+- (void)testSaveOrUpdateModel {
+    
+    SLStu *stu = [[SLStu alloc] init];
+    stu.stuNum = 2;
+    stu.age2 = 28;
+    stu.name = @"王二小";
+    stu.score = 99;
+    
+    [SLSqliteModelTool saveOrUpdateModel:stu uid:nil];
+
 }
 
 @end

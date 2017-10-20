@@ -111,4 +111,73 @@
     
 }
 
++ (BOOL)saveOrUpdateModel:(id)model uid:(NSString *)uid {
+    
+    // 如果用户再使用过程中, 直接调用这个方法, 去保存模型
+    // 保存一个模型
+    Class cls = [model class];
+    // 1. 判断表格是否存在, 不存在, 则创建
+    if (![SLTableTool isTableExists:cls uid:uid]) {
+        [self createTable:cls uid:uid];
+    }
+    // 2. 检测表格是否需要更新, 需要, 更新
+    if ([self isTableRequiredUpdate:cls uid:uid]) {
+        [self updateTable:cls uid:uid];
+    }
+    
+    // 3. 判断记录是否存在, 主键
+    // 从表格里面, 按照主键, 进行查询该记录, 如果能够查询到
+    NSString *tableName = [SLModelTool tableName:cls];
+    
+    if (![cls respondsToSelector:@selector(primaryKey)]) {
+        NSLog(@"如果想要操作这个模型, 必须要实现+ (NSString *)primaryKey;这个方法, 来告诉我主键信息");
+        return NO;
+    }
+    NSString *primaryKey = [cls primaryKey];
+    id primaryValue = [model valueForKeyPath:primaryKey];
+    
+    NSString *checkSql = [NSString stringWithFormat:@"select * from %@ where %@ = '%@'", tableName, primaryKey, primaryValue];
+    NSArray *result = [SLSqliteTool querySql:checkSql uid:uid];
+    
+    
+    // 获取字段数组
+    NSArray *columnNames = [SLModelTool classIvarNameTypeDic:cls].allKeys;
+    
+    // 获取值数组
+    // model keyPath:
+    NSMutableArray *values = [NSMutableArray array];
+    for (NSString *columnName in columnNames) {
+        id value = [model valueForKeyPath:columnName];
+        [values addObject:value];
+    }
+    
+    NSInteger count = columnNames.count;
+    NSMutableArray *setValueArray = [NSMutableArray array];
+    for (int i = 0; i < count; i++) {
+        NSString *name = columnNames[i];
+        id value = values[i];
+        NSString *setStr = [NSString stringWithFormat:@"%@='%@'", name, value];
+        [setValueArray addObject:setStr];
+    }
+    
+    // 更新
+    // 字段名称, 字段值
+    // update 表名 set 字段1=字段1值,字段2=字段2的值... where 主键 = '主键值'
+    NSString *execSql = @"";
+    if (result.count > 0) {
+        execSql = [NSString stringWithFormat:@"update %@ set %@  where %@ = '%@'", tableName, [setValueArray componentsJoinedByString:@","], primaryKey, primaryValue];
+        
+        
+    }else {
+        // insert into 表名(字段1, 字段2, 字段3) values ('值1', '值2', '值3')
+        // '   值1', '值2', '值3   '
+        // 插入
+        // text sz 'sz' 2 '2'
+        execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')", tableName, [columnNames componentsJoinedByString:@","], [values componentsJoinedByString:@"','"]];
+    }
+    
+    
+    return [SLSqliteTool deal:execSql uid:uid];
+}
+
 @end

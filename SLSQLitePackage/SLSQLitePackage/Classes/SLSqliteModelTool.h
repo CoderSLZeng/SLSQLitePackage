@@ -35,4 +35,13 @@
  @return 是否更新成功
  */
 + (BOOL)updateTable:(Class)cls uid:(NSString *)uid;
+
+/**
+ 保存/更新模型
+ 
+ @param model 模型
+ @param uid 用户唯一标识
+ @return 是否保存/更新模型成功
+ */
++ (BOOL)saveOrUpdateModel:(id)model uid:(NSString *)uid;
 @end
