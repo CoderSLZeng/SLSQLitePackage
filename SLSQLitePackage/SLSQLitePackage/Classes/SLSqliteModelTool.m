@@ -196,4 +196,17 @@
     
 }
 
++ (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@", tableName];
+    if (whereStr.length > 0) {
+        deleteSql = [deleteSql stringByAppendingFormat:@" where %@", whereStr];
+    }
+    
+    return [SLSqliteTool deal:deleteSql uid:uid];
+    
+}
+
 @end

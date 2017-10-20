@@ -55,4 +55,16 @@
  */
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid;
 
+// age > 19
+// score <= 10 and xxx
+/**
+ 根据条件来删除模型
+
+ @param cls 类名
+ @param whereStr 条件
+ @param uid 用户唯一标识
+ @return 是否删除模型成功
+ */
++ (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr uid:(NSString *)uid;
+
 @end
