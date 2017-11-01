@@ -261,12 +261,77 @@
     
 }
 
-+ (NSArray *)queryModels:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid {
++ (NSArray *)queryModels:(Class)cls
+              columnName:(NSString *)columnName
+                relation:(ColumnNameToValueRelationType)relation
+                   value:(id)value
+                     uid:(NSString *)uid {
     
     NSString *tableName = [SLModelTool tableName:cls];
     // 1. 拼接sql语句
-    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' ", tableName, name, self.ColumnNameToValueRelationTypeDic[@(relation)], value];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' ;", tableName, columnName, self.ColumnNameToValueRelationTypeDic[@(relation)], value];
     
+    
+    // 2. 查询结果集
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    return [self parseResults:results withClass:cls];
+    
+}
+
++ (NSArray *)queryModels:(Class)cls
+              columnName:(NSString *)name
+                relation:(ColumnNameToValueRelationType)relation
+                   value:(id)value
+         sortOrderByName:(NSString *)sortName
+                sequence:(SortOrderByType)sequence
+                     uid:(NSString *)uid
+{
+    NSString *tableName = [SLModelTool tableName:cls];
+    // 1. 拼接sql语句
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' order by %@ %@;", tableName, name, self.ColumnNameToValueRelationTypeDic[@(relation)], value, sortName, self.OrderByTypeDic[@(sequence)]];
+    
+    
+    // 2. 查询结果集
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    return [self parseResults:results withClass:cls];
+}
+
++ (NSArray *)queryModels:(Class)cls
+         columnFirstName:(NSString *)firstName
+           firstRelation:(ColumnNameToValueRelationType)firstRelation
+              firstValue:(id)firstValue
+        columnSecondName:(NSString *)secondName
+          secondRelation:(ColumnNameToValueRelationType)secondRelation
+             secondValue:(id)secondValue
+                     uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    // 1. 拼接sql语句
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' and %@ %@ '%@';", tableName, firstName, self.ColumnNameToValueRelationTypeDic[@(firstRelation)], firstValue, secondName, self.ColumnNameToValueRelationTypeDic[@(secondRelation)], secondValue];
+    
+    // 2. 查询结果集
+    NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
+    
+    return [self parseResults:results withClass:cls];
+    
+}
+
++ (NSArray *)queryModels:(Class)cls
+         columnFirstName:(NSString *)firstName
+           firstRelation:(ColumnNameToValueRelationType)firstRelation
+              firstValue:(id)firstValue
+        columnSecondName:(NSString *)secondName
+          secondRelation:(ColumnNameToValueRelationType)secondRelation
+             secondValue:(id)secondValue
+         sortOrderByName:(NSString *)sortName
+                sequence:(SortOrderByType)sequence
+                     uid:(NSString *)uid {
+    
+    NSString *tableName = [SLModelTool tableName:cls];
+    // 1. 拼接sql语句
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@' and %@ %@ '%@' order by %@ %@;", tableName, firstName, self.ColumnNameToValueRelationTypeDic[@(firstRelation)], firstValue, secondName, self.ColumnNameToValueRelationTypeDic[@(secondRelation)], secondValue, sortName, self.OrderByTypeDic[@(sequence)]];
     
     // 2. 查询结果集
     NSArray <NSDictionary *>*results = [SLSqliteTool querySql:sql uid:uid];
@@ -340,4 +405,12 @@
              };
 }
 
++ (NSDictionary *)OrderByTypeDic {
+    return @{
+             @(SortOrderByTypeAsc) : @"asc",
+             @(SortOrderByTypeDesc) : @"desc"
+             };
+}
+
 @end
+

@@ -113,11 +113,56 @@
 /**
  测试根据字段名条件筛选来查询，获取模型
  */
-- (void)testQueryModels {
+- (void)testQueryModelsWhere {
     
     NSArray *results = [SLSqliteModelTool queryModels:[SLStu class] columnName:@"name" relation:ColumnNameToValueRelationTypeEqual value:@"王二小1" uid:nil];
     NSLog(@"%@", results);
     
+}
+
+/**
+ 根据一个字段名条件并排序筛选来查询，获取模型
+ */
+- (void)testQueryModelsWhereOrderBy {
+    
+    NSArray *results = [SLSqliteModelTool queryModels:[SLStu class]
+                                           columnName:@"name"
+                                             relation:ColumnNameToValueRelationTypeEqual
+                                                value:@"王二小1"
+                                      sortOrderByName:@"score"
+                                             sequence:SortOrderByTypeAsc
+                                                  uid:nil];
+    NSLog(@"%@", results);
+    
+}
+
+
+/** 根据两个字段名条件筛选来查询，获取模型 */
+- (void)testQueryModelsWhere2 {
+    NSArray *results = [SLSqliteModelTool queryModels:[SLStu class]
+                                      columnFirstName:@"name"
+                                        firstRelation:ColumnNameToValueRelationTypeEqual
+                                           firstValue:@"王二小1"
+                                     columnSecondName:@"age"
+                                       secondRelation:ColumnNameToValueRelationTypeLess
+                                          secondValue:@"28"
+                                                  uid:nil];
+    NSLog(@"%@", results);
+}
+
+/** 根据两个字段名条件并排序筛选来查询，获取模型 */
+- (void)testQueryModelsWhereOrderBy2 {
+    NSArray *results = [SLSqliteModelTool queryModels:[SLStu class]
+                                      columnFirstName:@"name"
+                                        firstRelation:ColumnNameToValueRelationTypeEqual
+                                           firstValue:@"王二小1"
+                                     columnSecondName:@"age"
+                                       secondRelation:ColumnNameToValueRelationTypeLess
+                                          secondValue:@"28"
+                                      sortOrderByName:@"score"
+                                             sequence:SortOrderByTypeDesc
+                                                  uid:nil];
+    NSLog(@"%@", results);
 }
 
 

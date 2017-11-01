@@ -13,7 +13,12 @@ typedef NS_ENUM(NSUInteger, ColumnNameToValueRelationType) {
     ColumnNameToValueRelationTypeLess,
     ColumnNameToValueRelationTypeEqual,
     ColumnNameToValueRelationTypeMoreEqual,
-    ColumnNameToValueRelationTypeLessEqual,
+    ColumnNameToValueRelationTypeLessEqual
+};
+
+typedef NS_ENUM(NSUInteger, SortOrderByType) {
+    SortOrderByTypeAsc, // 正序
+    SortOrderByTypeDesc// 倒叙
 };
 
 @interface SLSqliteModelTool : NSObject
@@ -100,17 +105,90 @@ typedef NS_ENUM(NSUInteger, ColumnNameToValueRelationType) {
 
 
 /**
- 根据字段名条件筛选来查询，获取模型
+ 根据一个字段名条件筛选来查询，获取模型
 
  @param cls 类名
- @param name 字段名
+ @param columnName 字段名
  @param relation 关系类型
  @param value 字段名的值
  @param uid 用户唯一标识
  @return 模型的结果集，模型数组
  */
-+ (NSArray *)queryModels:(Class)cls columnName:(NSString *)name relation:(ColumnNameToValueRelationType)relation value:(id)value uid:(NSString *)uid;
++ (NSArray *)queryModels:(Class)cls
+              columnName:(NSString *)columnName
+                relation:(ColumnNameToValueRelationType)relation
+                   value:(id)value
+                     uid:(NSString *)uid;
 
+/**
+ 根据一个字段名条件并排序筛选来查询，获取模型
+ 
+ @param cls 类名
+ @param columnName 字段名
+ @param relation 关系类型
+ @param value 字段名的值
+ @param sortName 排序的字段
+ @param sequence 顺序类型
+ @param uid 用户唯一标识
+ @return 模型的结果集，模型数组
+ */
++ (NSArray *)queryModels:(Class)cls
+              columnName:(NSString *)columnName
+                relation:(ColumnNameToValueRelationType)relation
+                   value:(id)value
+         sortOrderByName:(NSString *)sortName
+                sequence:(SortOrderByType)sequence
+                     uid:(NSString *)uid;
+
+
+/**
+ 根据两个字段名条件筛选来查询，获取模型
+ 
+ @param cls 类名
+ @param firstName 第一个字段名
+ @param firstRelation 第一个关系类型
+ @param firstValue 第一个字段名的值
+ @param secondName 第二个字段名
+ @param secondRelation 第二个关系类型
+ @param secondValue 第二个字段名的值
+ @param uid 用户唯一标识
+ @return 模型的结果集，模型数组
+ */
++ (NSArray *)queryModels:(Class)cls
+         columnFirstName:(NSString *)firstName
+           firstRelation:(ColumnNameToValueRelationType)firstRelation
+              firstValue:(id)firstValue columnSecondName:(NSString *)secondName
+          secondRelation:(ColumnNameToValueRelationType)secondRelation
+             secondValue:(id)secondValue
+                     uid:(NSString *)uid;
+
+
+
+/**
+ 根据两个字段名条件并排序筛选来查询，获取模型
+ 
+ @param cls 类名
+ @param firstName 第一个字段名
+ @param firstRelation 第一个关系类型
+ @param firstValue 第一个字段名的值
+ @param secondName 第二个字段名
+ @param secondRelation 第二个关系类型
+ @param secondValue 第二个字段名的值
+ @param sortName 排序的字段
+ @param sequence 顺序类型
+ @param uid 用户唯一标识
+ @return 模型的结果集，模型数组
+ */
++ (NSArray *)queryModels:(Class)cls
+         columnFirstName:(NSString *)firstName
+           firstRelation:(ColumnNameToValueRelationType)firstRelation
+              firstValue:(id)firstValue
+        columnSecondName:(NSString *)secondName
+          secondRelation:(ColumnNameToValueRelationType)secondRelation
+             secondValue:(id)secondValue
+         sortOrderByName:(NSString *)sortName
+                sequence:(SortOrderByType)sequence
+                     uid:(NSString *)uid;
 
 /**
  根据SQL语句查询，获取模型
